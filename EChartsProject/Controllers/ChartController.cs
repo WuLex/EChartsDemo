@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EChartsProject.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EChartsProject.Controllers
 {
@@ -121,11 +122,9 @@ namespace EChartsProject.Controllers
 
             for (int i = 1; i < dimensions.Count; i++)
             {
-
                 //二维数组，其中第一行/列可以给出 维度名，也可以不给出，直接就是数据：
                 Dictionary<string, string> dict = new Dictionary<string, string>
                 {
-
                     { "流量入口", getWeekValue(i) },
 
                     { "邮件营销", new Random().Next(100, 999).ToString() },
@@ -139,7 +138,6 @@ namespace EChartsProject.Controllers
 
             vo.Dimensions = dimensions;
             vo.Source = source;
-
 
             //注意：如果使用了 dataset，那么可以在 dataset.dimensions 中定义 dimension ，或者在 dataset.source 的第一行/列中给出 dimension 名称。于是就不用在这里指定 dimension。但如果在这里指定了 dimensions，那么优先使用这里的。
             //二维数组，其中第一行/列可以给出 维度名，也可以不给出，直接就是数据：

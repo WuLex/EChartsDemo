@@ -1,0 +1,14 @@
+﻿@using EChartsProject.Common
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section header{
+    <script src="@JsFiles.ECharts"></script>
+    <script src="@JsFiles.UserReport"></script>
+}
+
+<a id="btnRefresh" href="#" class="easyui-linkbutton" >刷新</a>
+<div id="main" style="width: 600px;height:400px;"></div>
+
