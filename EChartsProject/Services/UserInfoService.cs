@@ -261,6 +261,8 @@ namespace EChartsProject.Services
 
         #endregion Sql Server2012及以上的分页
 
+
+        #region 图表
         //用户报表(饼图)
         public UserReportModel GetUserReport()
         {
@@ -413,5 +415,6 @@ namespace EChartsProject.Services
 
             return userColumnReportModel;
         }
+        #endregion
     }
 }
