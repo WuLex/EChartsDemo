@@ -27,32 +27,15 @@ namespace EChartsProject.Controllers
             return View();
         }
 
-        //string con = @"Data Source='" + System.Web.HttpContext.Current.Server.MapPath("~/app_data/chartdb.sdf") + "'";
-        //DataSet ds = new DataSet();
-        //SqlCeDataAdapter da = new SqlCeDataAdapter();
-        //JavaScriptSerializer jsS = new JavaScriptSerializer();
-        //List<object> lists = new List<object>();
-        //string result = "";
+        public IActionResult Pie()
+        {
+            return View();
+        }
 
-        //public void ProcessRequest(HttpContext context)
-        //{
-        //    string command = context.Request["cmd"];
-
-        //    switch (command)
-        //    {
-        //        case "pie":
-        //            GetPie(context);
-        //            break;
-        //        case "bar":
-        //            GetBars(context);
-        //            break;
-        //    };
-
-        //}
-
+        [HttpGet]
         public async Task<string> GetPieAsync()
         {
-            string sql = @"  select categoryname as name, count(*) as count from lists group by categoryname";
+            string sql = @"select categoryname as name, count(*) as count from Category group by categoryname";
             var dt = await GetData(sql);
             var lists = new List<object>();
             foreach (DataRow dr in dt.Rows)
@@ -68,10 +51,11 @@ namespace EChartsProject.Controllers
             //result = jsS.Serialize(lists);
             //context.Response.Write(result);
         }
-
-        public async Task<string> GetBars()
+      
+        [HttpGet]
+        public async Task<string> GetBarsAsync()
         {
-            string sql = @"  select CONVERT(NVARCHAR(10),createdate,120) as date,   count(*) as count from lists  group by CONVERT(NVARCHAR(10),createdate,120) ";
+            string sql = @"select CONVERT(NVARCHAR(10),createdate,120) as date,count(*) as count from Category group by CONVERT(NVARCHAR(10),createdate,120)";
             var dt = await GetData(sql);
             var lists = new List<object>();
 
