@@ -1,11 +1,24 @@
+using EChartsProject.Dtos;
+using EChartsProject.Models;
 using EChartsProject.Services;
+using Mapster;
+using MapsterMapper;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SqlSugar;
 
+
 var builder = WebApplication.CreateBuilder(args);
-
-
+var Configuration = builder.Configuration;
 builder.Services.AddControllersWithViews();
+#region 启动时，注册Mapster的TypeAdapterConfig和ServiceMapper
+var config = new TypeAdapterConfig();
+builder.Services.AddSingleton(config);
+builder.Services.AddScoped<IMapper, ServiceMapper>(); 
+#endregion
+builder.Services.AddDbContext<BcSwapDbContext>(options =>
+      options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<UserInfoService>();
 #region SqlSugar注入
@@ -22,6 +35,8 @@ builder.Services.AddScoped<ISqlSugarClient>(o =>
 #endregion
 
 var app = builder.Build();
+// 在启动时配置映射
+DtoMapping.ConfigureMappings();
 
 
 if (!app.Environment.IsDevelopment())

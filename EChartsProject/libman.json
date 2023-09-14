@@ -1251,6 +1251,11 @@
         "types/src/echarts.simple.d.ts",
         "types/src/extension.d.ts"
       ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "layui@2.8.17",
+      "destination": "wwwroot/lib/layui/"
     }
   ]
 }

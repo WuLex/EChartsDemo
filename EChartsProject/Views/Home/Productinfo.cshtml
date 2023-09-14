@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>商品卡片列表</title>
+    <link href="~/lib/layui/css/layui.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="layui-container">
+        <!-- 商品卡片列表将在此处生成 -->
+        <div id="productList" class="layui-row"></div>
+    </div>
+
+    <script src="~/lib/layui/layui.js"></script>
+    <script>
+        layui.use(['jquery'], function () {
+            var $ = layui.jquery;
+
+            // 获取商品数据
+            $.get('/api/product', function (data) {
+                var productList = $('#productList');
+                productList.empty();
+
+                // 遍历商品数据并生成卡片
+                for (var i = 0; i < data.length; i++) {
+                    var productCard = '<div class="layui-col-md4 layui-col-sm6">' +
+                        '<div class="layui-card">' +
+                        '<div class="layui-card-header" style="background-color: #16baaa;"># ' + data[i].productID + '</div>' +
+                        '<div class="layui-card-body">' +
+                        'Name: ' + data[i].name + '<br>' +
+                        '标签: ';
+
+                    // 遍历标签并为每个标签添加 Badge 样式
+                    for (var j = 0; j < data[i].tagNames.length; j++) {
+                        productCard += '<span class="layui-badge layui-bg-blue">' + data[i].tagNames[j] + '</span> ';
+                    }
+
+                    productCard += '</div>' +
+                        '</div>' +
+                        '</div>';
+
+                    productList.append(productCard);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

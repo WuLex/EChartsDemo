@@ -18,6 +18,11 @@ namespace EChartsProject.Controllers
             return View();
         }
 
+        public IActionResult Productinfo()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
